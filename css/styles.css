@@ -225,19 +225,33 @@ nav.scrolled {
     text-align: left;
     max-width: 600px;
     flex-shrink: 0;
+    position: relative;
 }
 
-.hero-shape {
+.hero-shape-desktop,
+.hero-shape-mobile {
     position: absolute;
-    width: 300px;
-    height: 300px;
     background: #f0832a72;
     border-radius: 45% 55% 60% 40% / 50% 60% 40% 50%;
+    animation: float 12s ease-in-out infinite;
+    z-index: -1;
+}
+
+.hero-shape-desktop {
+    width: 300px;
+    height: 300px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: float 12s ease-in-out infinite;
-    z-index: -1;
+}
+
+.hero-shape-mobile {
+    display: none;
+    width: 270px;
+    height: 220px;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 @keyframes float {
@@ -383,6 +397,31 @@ nav.scrolled {
 }
 
 /* Content */
+.page-header {
+    padding: 160px var(--spacing-md) 60px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    max-width: var(--content-width);
+    margin: 0 auto;
+}
+
+.page-header h1 {
+    font-size: 56px;
+    font-weight: 900;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+.page-header p {
+    font-size: 20px;
+    color: var(--text-light);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
 .content-section {
     max-width: var(--content-width);
     margin: 80px auto;
@@ -1162,8 +1201,12 @@ footer {
         font-size: 14px;
     }
 
+    .logo {
+        margin-top: -10px;
+    }
+
     .logo-img {
-        height: 50px;
+        height: 60px;
     }
 
     .hero {
@@ -1209,14 +1252,29 @@ footer {
         margin-left: 0;
     }
 
-    .hero-shape {
-        width: 180px;
-        height: 180px;
+    .hero-shape-desktop {
+        display: none;
+    }
+
+    .hero-shape-mobile {
+        display: block;
     }
 
     .content-section {
         padding: var(--spacing-md) var(--spacing-sm);
         margin: var(--spacing-md) var(--spacing-sm);
+    }
+
+    .page-header {
+        padding: 120px var(--spacing-sm) 40px;
+    }
+
+    .page-header h1 {
+        font-size: 36px;
+    }
+
+    .page-header p {
+        font-size: 17px;
     }
 
     .content-section h2 {
@@ -1234,6 +1292,7 @@ footer {
     }
 
     .service-card {
+        padding-top: 15px;
         flex: 1 1 100%;
         max-width: 100%;
         height: auto;
