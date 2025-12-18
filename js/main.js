@@ -1,53 +1,80 @@
-// Navigation functionality
-const links = document.querySelectorAll('.nav-link');
-const blob = document.getElementById('navBlob');
-const menuToggle = document.getElementById('menuToggle');
-const navLinks = document.getElementById('navLinks');
+// ============================================
+// NAVBAR LOADER
+// ============================================
 
-function updateBlob(link) {
-  if (window.innerWidth > 768) {
-    const rect = link.getBoundingClientRect();
-    const navRect = link.parentElement.getBoundingClientRect();
-    blob.style.width = rect.width + 'px';
-    blob.style.height = rect.height + 'px';
-    blob.style.left = (rect.left - navRect.left) + 'px';
-    blob.style.top = (rect.top - navRect.top) + 'px';
-    blob.classList.add('active');
+async function loadNavbar() {
+  const navbarContainer = document.getElementById('navbar-container');
+  if (!navbarContainer) return;
+  
+  try {
+    const response = await fetch('components/navbar.html');
+    const html = await response.text();
+    navbarContainer.innerHTML = html;
+    
+    // Set active link based on current page
+    const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'index';
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+      if (link.dataset.page === currentPage) {
+        link.classList.add('active');
+      }
+    });
+    
+    // Initialize navigation after loading
+    initNavigation();
+  } catch (error) {
+    console.error('Error loading navbar:', error);
   }
 }
 
-links.forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    links.forEach(l => l.classList.remove('active'));
-    link.classList.add('active');
-    updateBlob(link);
-    
-    if (window.innerWidth <= 768) {
-      navLinks.classList.remove('active');
-      menuToggle.classList.remove('active');
+// ============================================
+// NAVIGATION FUNCTIONALITY
+// ============================================
+
+function initNavigation() {
+  const nav = document.querySelector('nav');
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  // Scroll effect for navbar
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 50) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
     }
   });
-});
 
-if (menuToggle) {
-  menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    menuToggle.classList.toggle('active');
-  });
-}
-
-const activeLink = document.querySelector('.nav-link.active');
-if (activeLink && window.innerWidth > 768) {
-  setTimeout(() => updateBlob(activeLink), 100);
-}
-
-window.addEventListener('resize', () => {
-  const activeLink = document.querySelector('.nav-link.active');
-  if (activeLink && window.innerWidth > 768) {
-    updateBlob(activeLink);
+  // Mobile menu toggle
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      menuToggle.classList.toggle('active');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+        menuToggle.classList.remove('active');
+      }
+    });
+    
+    // Close menu when clicking a link
+    const links = navLinks.querySelectorAll('.nav-link');
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 968) {
+          navLinks.classList.remove('active');
+          menuToggle.classList.remove('active');
+        }
+      });
+    });
   }
-});
+}
+
+// Load navbar on DOM ready
+document.addEventListener('DOMContentLoaded', loadNavbar);
 
 // Form validation
 const contactForm = document.getElementById('contactForm');
