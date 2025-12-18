@@ -36,6 +36,11 @@ function initNavigation() {
   const menuToggle = document.getElementById('menuToggle');
   const navLinks = document.getElementById('navLinks');
 
+  // Check initial scroll position and apply scrolled class if needed
+  if (window.pageYOffset > 50) {
+    nav.classList.add('scrolled');
+  }
+
   // Scroll effect for navbar
   window.addEventListener('scroll', () => {
     if (window.pageYOffset > 50) {
@@ -75,6 +80,25 @@ function initNavigation() {
 
 // Load navbar on DOM ready
 document.addEventListener('DOMContentLoaded', loadNavbar);
+
+// ============================================
+// FOOTER LOADER
+// ============================================
+
+async function loadFooter() {
+  const footerContainer = document.getElementById('footer-container');
+  if (!footerContainer) return;
+  try {
+    const response = await fetch('components/footer.html');
+    const html = await response.text();
+    footerContainer.innerHTML = html;
+  } catch (error) {
+    console.error('Error loading footer:', error);
+  }
+}
+
+// Load footer on DOM ready
+document.addEventListener('DOMContentLoaded', loadFooter);
 
 // Form validation
 const contactForm = document.getElementById('contactForm');
