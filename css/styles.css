@@ -1939,6 +1939,7 @@ footer {
         padding: 100px var(--spacing-sm) var(--spacing-md);
         gap: var(--spacing-md);
         min-height: auto;
+        align-items: center;
     }
 
     .hero-content {
@@ -1972,15 +1973,22 @@ footer {
 
     .hero-image-container {
         width: 100%;
-        max-width: 320px;
-        height: 320px;
-        margin-left: 0;
+        max-width: 340px;
+        height: 280px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
     .hero-image-blob {
-        width: 70%;
-        height: 70%;
-        aspect-ratio: 1 / 1;
+        margin-left: 0;
+        width: 95%;
+        height: 100%;
+        aspect-ratio: 4 / 3;
+        border-radius: 35% 65% 40% 60% / 55% 45% 55% 45%;
+        left: 50%;
+        transform: translateX(-50%);
     }
 
     .hero-shape-desktop {
@@ -2015,6 +2023,21 @@ footer {
 
     .content-section h3 {
         font-size: 24px;
+        margin: 30px 0 12px;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+
+    .content-section p {
+        font-size: 16px;
+        line-height: 1.7;
+        margin-bottom: 16px;
+    }
+
+    .content-section p strong {
+        display: block;
+        margin-top: 8px;
     }
 
     .services-grid {
@@ -2240,23 +2263,38 @@ footer {
         gap: 20px;
     }
 
+    .why-card {
+        padding: 30px 25px;
+    }
+
+    .why-card h3 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .why-card p {
+        font-size: 15px;
+    }
+
     .stats-container {
         grid-template-columns: repeat(2, 1fr);
         gap: 30px;
     }
 
-    .stat-number {
-        font-size: 42px;
-    }section p {
-        font-size: 16px;
-        margin-bottom: 40px;
-        padding: 0 10px;
+    .stat-card {
+        padding: 25px 15px;
     }
 
-    .stats-
+    .stat-number {
+        font-size: 42px;
+    }
 
     .stat-label {
         font-size: 15px;
+    }
+
+    .stats-section {
+        padding: 60px var(--spacing-sm);
     }
 
     .stats-section h3 {
@@ -2268,6 +2306,11 @@ footer {
         font-size: 16px;
         margin-bottom: 40px;
         padding: 0 10px;
+    }
+
+    .cta-section {
+        padding: 50px var(--spacing-sm);
+        margin: 60px var(--spacing-sm);
     }
 
     .cta-content h2 {
@@ -2299,21 +2342,101 @@ footer {
 
 @media (max-width: 480px) {
     .hero-image-container {
-        max-width: 280px;
-        height: 280px;
+        max-width: 300px;
+        height: 240px;
+        margin: 0 auto;
+    }
+    
+    .hero-image-blob {
+        width: 100%;
+        border-radius: 38% 62% 43% 57% / 52% 48% 52% 48%;
+        left: 50%;
+        transform: translateX(-50%);
     }
     
     .hero-shape-mobile {
         width: 240px;
-        height: 240px;
+        height: 200px;
+        top: 40px;
+    }
+
+    .hero-content h1 {
+        font-size: 36px;
+    }
+
+    .hero-content p {
+        font-size: 16px;
+    }
+
+    .hero-btn {
+        font-size: 14px;
+        padding: 12px 20px;
     }
 
     .page-header h1 {
         font-size: 32px;
+        line-height: 1.2;
+    }
+
+    .page-header p {
+        font-size: 16px;
+    }
+
+    .content-section {
+        padding: 30px 20px;
+        margin: 40px 15px;
+    }
+
+    .content-section h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
     }
 
     .content-section h2 {
         font-size: 28px;
+    }
+
+    .content-section h3 {
+        font-size: 20px;
+        margin: 25px 0 10px;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+
+    .content-section p {
+        font-size: 15px;
+        line-height: 1.7;
+        margin-bottom: 14px;
+    }
+
+    .content-section p strong {
+        display: inline-block;
+        margin-top: 6px;
+    }
+
+    .service-card {
+        padding: 30px 20px;
+    }
+
+    .service-card h3 {
+        font-size: 22px;
+    }
+
+    .service-card p {
+        font-size: 15px;
+    }
+
+    .why-card {
+        padding: 25px 20px;
+    }
+
+    .why-card h3 {
+        font-size: 22px;
+    }
+
+    .why-card p {
+        font-size: 14px;
     }
 
     .about-logo img {
@@ -2337,8 +2460,46 @@ footer {
         gap: 20px;
     }
 
+    .stat-card {
+        padding: 20px 15px;
+    }
+
+    .stat-number {
+        font-size: 36px;
+    }
+
+    .stat-label {
+        font-size: 14px;
+    }
+
+    .stats-section {
+        padding: 50px var(--spacing-sm);
+    }
+
+    .stats-section h3 {
+        font-size: 28px;
+    }
+
+    .stats-intro {
+        font-size: 15px;
+    }
+
+    .cta-section {
+        padding: 40px var(--spacing-sm);
+        margin: 50px var(--spacing-sm);
+    }
+
     .cta-content h2 {
         font-size: 28px;
+    }
+
+    .cta-content p {
+        font-size: 16px;
+    }
+
+    .cta-btn-large {
+        padding: 16px 32px;
+        font-size: 15px;
     }
 
     /* Detail Pages Extra Small */
