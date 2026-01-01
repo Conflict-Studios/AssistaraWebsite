@@ -640,7 +640,7 @@ nav.scrolled {
     position: relative;
     overflow: hidden;
     flex: 0 1 340px;
-    height: 630px;
+    height: 730px;
     display: flex;
     flex-direction: column;
 }
@@ -711,7 +711,7 @@ nav.scrolled {
 .service-card h3 {
     font-size: 26px;
     color: var(--primary);
-    margin: 0 0 18px;
+    margin: 0 0 25px;
     position: relative;
     z-index: 1;
     font-weight: 800;
