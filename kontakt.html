@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary Meta Tags -->
+  <title>Kontakt - Assistara | Wir sind für dich da</title>
+  <meta name="title" content="Kontakt - Assistara | Wir sind für dich da">
+  <meta name="description" content="Kontaktiere assistara für Beratung, Anfragen oder Bewerbungen. Büros in Heidelberg und Groß-Gerau.">
+  <meta name="keywords" content="Assistara Kontakt, Beratung, Bewerbung, Heidelberg, Groß-Gerau">
+  <meta name="author" content="Assistara">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://assistara.de/kontakt.html">
+  <meta property="og:title" content="Kontakt - Assistara">
+  <meta property="og:description" content="Kontaktiere assistara für Beratung, Anfragen oder Bewerbungen.">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:site_name" content="Assistara">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary">
+  <meta property="twitter:url" content="https://assistara.de/kontakt.html">
+  <meta property="twitter:title" content="Kontakt - Assistara">
+  <meta property="twitter:description" content="Kontaktiere assistara für Beratung, Anfragen oder Bewerbungen.">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://assistara.de/kontakt.html">
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/openmoji/openmoji-color-awesome.css">
+  
+  <!-- Structured Data / JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Assistara",
+      "url": "https://assistara.de",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "+49-123-4455566",
+          "contactType": "customer service",
+          "email": "info@assistara.de",
+          "areaServed": "DE",
+          "availableLanguage": "German"
+        }
+      ]
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- Navbar wird per JavaScript geladen -->
+  <div id="navbar-container"></div>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <h1>Kontakt</h1>
+    <p>Wir sind für dich da. Ob Fragen, Beratung oder Bewerbung – melde dich bei uns.</p>
+  </section>
+
+  <!-- Kontaktinformationen -->
+  <section class="content-section">
+    <h2>So erreichst du uns</h2>
+    <div class="section-intro">
+      <p>Du hast Fragen zu unseren Leistungen, möchtest dich beraten lassen oder dich bei uns bewerben? Nutze das Kontaktformular oder wende dich direkt an eines unserer Büros.</p>
+    </div>
+    
+    <div class="locations-grid">
+      <div class="location-card">
+        <div class="location-icon">
+          <i class="oma oma-round-pushpin"></i>
+        </div>
+        <h3>Büro Heidelberg</h3>
+        <p class="location-region">Rhein-Neckar-Region</p>
+        <div class="location-details">
+          <p class="location-address">Bergheimer Straße 104<br>69115 Heidelberg</p>
+          <div class="contact-info">
+            <p><i class="oma oma-envelope"></i> <strong>E-Mail:</strong> info@assistara.de</p>
+            <p><i class="oma oma-telephone"></i> <strong>Telefon:</strong> tbd</p>
+          </div>
+        </div>
+        <a href="https://maps.google.com/?q=Bergheimer+Straße+104+69115+Heidelberg" target="_blank" class="map-btn">
+          <i class="oma oma-world-map"></i>
+          In Google Maps öffnen
+        </a>
+      </div>
+      
+      <div class="location-card">
+        <div class="location-icon">
+          <i class="oma oma-round-pushpin"></i>
+        </div>
+        <h3>Büro Groß-Gerau</h3>
+        <p class="location-region">Rhein-Main-Gebiet und Südhessen</p>
+        <div class="location-details">
+          <p class="location-address">Walther-Rathenau-Straße 16<br>64521 Groß-Gerau</p>
+          <div class="contact-info">
+            <p><i class="oma oma-envelope"></i> <strong>E-Mail:</strong> info@assistara.de</p>
+            <p><i class="oma oma-telephone"></i> <strong>Telefon:</strong> tbd</p>
+          </div>
+        </div>
+        <a href="https://maps.google.com/?q=Walther-Rathenau-Straße+16+64521+Groß-Gerau" target="_blank" class="map-btn">
+          <i class="oma oma-world-map"></i>
+          In Google Maps öffnen
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kontaktformular -->
+  <section class="content-section">
+    <h2>Kontaktformular</h2>
+    
+    <!-- Demo Notice -->
+    <div class="demo-notice">
+      <div class="demo-notice-icon">
+        <i class="oma oma-warning"></i>
+      </div>
+      <div class="demo-notice-content">
+        <h4>Demo-Version</h4>
+        <p>Dies ist eine Demo-Version des Kontaktformulars. Die Absende-Funktion ist derzeit noch nicht aktiv. Deine Nachricht wird nicht versendet.</p>
+      </div>
+    </div>
+    
+    <form class="contact-form" id="contactForm">
+      <!-- Kontaktart -->
+      <div class="form-group">
+        <label for="contactType">Art der Anfrage *</label>
+        <select id="contactType" name="contactType" required>
+          <option value="">Bitte auswählen</option>
+          <option value="allgemein">Allgemeine Anfrage</option>
+          <option value="beratung">Beratungswunsch</option>
+          <option value="bewerbung">Bewerbung</option>
+          <option value="sonstiges">Sonstiges</option>
+        </select>
+      </div>
+
+      <!-- Allgemeine Felder -->
+      <div class="form-group">
+        <label for="name">Name *</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">E-Mail *</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Telefon</label>
+        <input type="tel" id="phone" name="phone">
+      </div>
+
+      <!-- Bewerbungs-spezifische Felder (versteckt bis Bewerbung ausgewählt) -->
+      <div id="applicationFields" style="display: none;">
+        <div class="form-group">
+          <label for="address">Adresse *</label>
+          <textarea id="address" name="address" rows="3" placeholder="Straße, Hausnummer, PLZ, Ort"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Interesse an Position(en) * (Mehrfachauswahl möglich)</label>
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" name="position" value="persoenliche-assistenz">
+              <span>Persönliche Assistenz</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="position" value="schulbegleitung">
+              <span>Schulbegleitung</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="position" value="individualbegleitung">
+              <span>Individualbegleitung</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="position" value="paedagogische-fachkraft">
+              <span>Pädagogische Fachkraft</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Bevorzugter Standort * (Mehrfachauswahl möglich)</label>
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" name="location" value="heidelberg">
+              <span>Heidelberg</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="location" value="gross-gerau">
+              <span>Groß-Gerau</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="location" value="virtual">
+              <span>Virtuell / Remote</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="startDate">Gewünschtes Eintrittsdatum *</label>
+          <input type="date" id="startDate" name="startDate">
+        </div>
+
+        <div class="form-group">
+          <label for="hours">Gewünschter Stundenumfang *</label>
+          <select id="hours" name="hours">
+            <option value="">Bitte auswählen</option>
+            <option value="bis-10">Bis 10 Stunden / Woche</option>
+            <option value="10-20">10-20 Stunden / Woche</option>
+            <option value="20-30">20-30 Stunden / Woche (Maximum)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Nachricht -->
+      <div class="form-group">
+        <label for="message">Nachricht *</label>
+        <textarea id="message" name="message" rows="6" required placeholder="Deine Nachricht an uns..."></textarea>
+      </div>
+
+      <!-- Datenschutz -->
+      <div class="form-group">
+        <label class="checkbox-label">
+          <input type="checkbox" name="privacy" required>
+          <span>Ich habe die <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a> zur Kenntnis genommen. *</span>
+        </label>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="form-group">
+        <button type="submit" class="submit-btn">Nachricht senden</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Footer wird per JavaScript geladen -->
+  <div id="footer-container"></div>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Dynamisches Formular für Bewerbungen
+    document.addEventListener('DOMContentLoaded', function() {
+      const contactTypeSelect = document.getElementById('contactType');
+      const applicationFields = document.getElementById('applicationFields');
+      const addressField = document.getElementById('address');
+      const startDateField = document.getElementById('startDate');
+      const hoursField = document.getElementById('hours');
+
+      contactTypeSelect.addEventListener('change', function() {
+        if (this.value === 'bewerbung') {
+          applicationFields.style.display = 'block';
+          addressField.setAttribute('required', 'required');
+          startDateField.setAttribute('required', 'required');
+          hoursField.setAttribute('required', 'required');
+        } else {
+          applicationFields.style.display = 'none';
+          addressField.removeAttribute('required');
+          startDateField.removeAttribute('required');
+          hoursField.removeAttribute('required');
+        }
+      });
+
+      // Form Submission Handler
+      document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Validierung für Bewerbungen
+        if (contactTypeSelect.value === 'bewerbung') {
+          const positionChecked = document.querySelectorAll('input[name="position"]:checked').length > 0;
+          const locationChecked = document.querySelectorAll('input[name="location"]:checked').length > 0;
+          
+          if (!positionChecked) {
+            alert('Bitte wähle mindestens eine Position aus.');
+            return;
+          }
+          
+          if (!locationChecked) {
+            alert('Bitte wähle mindestens einen Standort aus.');
+            return;
+          }
+        }
+
+        // Demo-Nachricht anzeigen
+        showDemoModal();
+        this.reset();
+        applicationFields.style.display = 'none';
+      });
+
+      // Demo Modal Funktion
+      function showDemoModal() {
+        // Modal erstellen
+        const modalOverlay = document.createElement('div');
+        modalOverlay.className = 'modal-overlay';
+        
+        modalOverlay.innerHTML = `
+          <div class="modal-content">
+            <div class="modal-icon">
+              <i class="oma oma-construction-worker"></i>
+            </div>
+            <h3>Noch in Entwicklung</h3>
+            <p>Das Kontaktformular befindet sich noch in der Entwicklung. Die Versand-Funktion wird in Kürze verfügbar sein.</p>
+            <button class="modal-btn" onclick="this.closest('.modal-overlay').remove()">Verstanden</button>
+          </div>
+        `;
+        
+        document.body.appendChild(modalOverlay);
+        
+        // Modal anzeigen
+        setTimeout(() => {
+          modalOverlay.classList.add('active');
+        }, 10);
+        
+        // Beim Klick auf Overlay schließen
+        modalOverlay.addEventListener('click', (e) => {
+          if (e.target === modalOverlay) {
+            modalOverlay.remove();
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
