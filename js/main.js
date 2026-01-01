@@ -13,12 +13,33 @@ async function loadNavbar() {
     
     // Set active link based on current page
     const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'index';
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-      if (link.dataset.page === currentPage) {
+    
+    // Check if current page is a dropdown item
+    const dropdownLinks = document.querySelectorAll('.dropdown-link');
+    let isDropdownPage = false;
+    
+    dropdownLinks.forEach(link => {
+      const linkPage = link.getAttribute('href').replace('.html', '');
+      if (linkPage === currentPage) {
         link.classList.add('active');
+        // Also mark the parent "Leistungen" link as active
+        const parentNavLink = link.closest('.nav-dropdown').querySelector('.nav-link');
+        if (parentNavLink) {
+          parentNavLink.classList.add('active');
+        }
+        isDropdownPage = true;
       }
     });
+    
+    // Set active for main nav links if not a dropdown page
+    if (!isDropdownPage) {
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        if (link.dataset.page === currentPage) {
+          link.classList.add('active');
+        }
+      });
+    }
     
     // Initialize navigation after loading
     initNavigation();
