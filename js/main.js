@@ -174,8 +174,62 @@ async function loadFooter() {
   }
 }
 
+
 // Load footer on DOM ready
 document.addEventListener('DOMContentLoaded', loadFooter);
+
+// ============================================
+// HERO SLIDESHOW
+// ============================================
+document.addEventListener('DOMContentLoaded', function () {
+  const slideshowImages = [
+    'data/images/slideshow/Assistara_Bild_Slideshow01.jpeg',
+    'data/images/slideshow/Assistara_Bild_Slideshow02.jpeg',
+    'data/images/slideshow/Assistara_Bild_Slideshow03.jpeg',
+    'data/images/slideshow/Assistara_Bild_Slideshow04.jpeg',
+    'data/images/slideshow/Assistara_Bild_Slideshow05.jpeg',
+    'data/images/slideshow/Assistara_Bild_Slideshow06.jpeg',
+    'data/images/slideshow/Assistara_Bild_Slideshow07.jpeg',
+    'data/images/slideshow/Assistara_Bild_Slideshow08.jpeg',
+    'data/images/slideshow/Assistara_Bild_Slideshow09.jpeg',
+    'data/images/slideshow/Assistara_Bild_Slideshow10.jpeg',
+    'data/images/slideshow/Assistara_Bild_Slideshow11.jpeg',
+    'data/images/slideshow/Assistara_Bild_Slideshow12.jpeg',
+    'data/images/slideshow/Assistara_Bild_Slideshow13.jpeg',
+    'data/images/slideshow/Assistara_Bild_Slideshow14.jpeg',
+    'data/images/slideshow/Assistara_Bild_Slideshow15.jpeg',
+    'data/images/slideshow/Assistara_Bild_Slideshow16.jpeg',
+    'data/images/slideshow/Assistara_Bild_Slideshow17.jpeg',
+  ];
+  const slideshowContainer = document.getElementById('hero-slideshow');
+  if (!slideshowContainer) return;
+
+  // Create image elements
+  slideshowImages.forEach((src, idx) => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = 'Assistara Slideshow Bild ' + (idx + 1);
+    img.className = 'slideshow-image';
+    img.style.opacity = idx === 0 ? '1' : '0';
+    img.style.zIndex = idx === 0 ? '2' : '1';
+    slideshowContainer.appendChild(img);
+  });
+
+  let current = 0;
+  const images = slideshowContainer.querySelectorAll('.slideshow-image');
+  if (images.length <= 1) return;
+
+  setInterval(() => {
+    const prev = current;
+    current = (current + 1) % images.length;
+    images[prev].style.transition = 'opacity 1.2s';
+    images[current].style.transition = 'opacity 1.2s';
+    images[prev].style.opacity = '0';
+    images[current].style.opacity = '1';
+    images[current].style.zIndex = '2';
+    images[prev].style.zIndex = '1';
+  }, 5000);
+});
 
 // Form validation
 const contactForm = document.getElementById('contactForm');
