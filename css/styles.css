@@ -292,7 +292,7 @@ nav.scrolled {
 
 .menu-toggle span {
     width: 22px;
-    height: 2px;
+    height: 3px;
     background: var(--primary);
     transition: var(--transition);
     border-radius: 2px;
@@ -378,10 +378,14 @@ nav.scrolled {
 .hero-content h1 {
     font-size: 72px;
     font-weight: 900;
-    color: var(--text-dark);
+    color: var(--primary);
     margin-bottom: 32px;
     line-height: 1.1;
     animation: fadeInUp 0.8s ease;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    hyphens: none;
+    word-break: keep-all;
 }
 
 .hero-content p {
@@ -529,9 +533,13 @@ nav.scrolled {
 .page-header h1 {
     font-size: 56px;
     font-weight: 900;
-    color: var(--text-dark);
+    color: var(--primary);
     margin-bottom: 16px;
     line-height: 1.2;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    hyphens: none;
+    word-break: keep-all;
 }
 
 .page-header p {
@@ -574,6 +582,33 @@ nav.scrolled {
     color: var(--text-light);
     line-height: 1.8;
     margin-bottom: var(--spacing-sm);
+    text-align: justify;
+    text-justify: inter-word;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    hyphens: none;
+}
+
+/* Apply block-justified text consistently to main content areas */
+.content-section ul li,
+.content-section p,
+.page-header p,
+.intro-text,
+.wide,
+.section-intro,
+.hero-content p {
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+}
+
+/* Headings: uniform blue and disable hyphenation to avoid mid-word dashes */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary) !important;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    hyphens: none;
+    word-break: keep-all;
 }
 
 .content-section ul {
@@ -913,7 +948,7 @@ nav.scrolled {
 .stats-section h3 {
     font-size: 48px;
     font-weight: 800;
-    color: var(--white);
+    color: var(--white) !important;
     text-align: center;
     margin-bottom: 20px;
     position: relative;
@@ -1430,6 +1465,7 @@ footer {
 }
 
 .footer-section h4 {
+    color: var(--white) !important;
     font-size: 20px;
     font-weight: 700;
     margin-bottom: 16px;
@@ -1643,7 +1679,7 @@ footer {
 .location-card h3 {
     font-size: 28px;
     color: var(--primary);
-    margin: 0 0 10px;
+    margin: 0 0 30px;
     text-align: center;
     font-weight: 800;
 }
@@ -1848,6 +1884,7 @@ footer {
 }
 
 .page-subtitle {
+    text-align: center !important;
     font-size: 22px;
     font-weight: 600;
     color: var(--primary);
@@ -2714,7 +2751,7 @@ footer {
     }
 
     .location-card {
-        padding: 25px 15px;
+        padding: 25px 25px;
     }
 
     .location-icon .oma {
