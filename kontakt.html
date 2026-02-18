@@ -35,6 +35,9 @@
   <link rel="stylesheet" href="css/openmoji/openmoji-color-awesome.css">
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
+  <!-- reCAPTCHA v3 -->
+  <script src="https://www.google.com/recaptcha/api.js?render=6LfuXHAsAAAAAN1GemDix07OUFs4NwAQBi4G03BD"></script>
+  
   <!-- Structured Data / JSON-LD -->
   <script type="application/ld+json">
   {
@@ -120,27 +123,21 @@
   <section class="content-section">
     <h2>Kontaktformular</h2>
     
-    <!-- Demo Notice -->
-    <div class="demo-notice">
-      <div class="demo-notice-icon">
-        <!-- <i class="oma oma-warning"></i> -->
-      </div>
-      <div class="demo-notice-content">
-        <h4>Demo-Version</h4>
-        <p>Dies ist eine Demo-Version des Kontaktformulars. Die Absende-Funktion ist derzeit noch nicht aktiv. Deine Nachricht wird nicht versendet.</p>
-      </div>
-    </div>
-    
     <form class="contact-form" id="contactForm">
+      <!-- CSRF Token (Hidden) -->
+      <input type="hidden" id="csrfToken" name="csrf_token" value="">
+      
+      <!-- Honeypot Field (Hidden - Spam Protection) -->
+      <input type="text" name="website" id="website" style="display:none !important;" tabindex="-1" autocomplete="off">
       <!-- Kontaktart -->
       <div class="form-group">
         <label for="contactType">Art der Anfrage *</label>
         <select id="contactType" name="contactType" required>
           <option value="">Bitte auswählen</option>
-          <option value="allgemein">Allgemeine Anfrage</option>
-          <option value="beratung">Beratungswunsch</option>
-          <option value="bewerbung" disabled>Bewerbung(über Indeed)</option>
-          <option value="sonstiges">Sonstiges</option>
+          <option value="general">Allgemeine Anfrage</option>
+          <option value="consultation">Beratungswunsch</option>
+          <option value="application" disabled>Bewerbung (über Indeed)</option>
+          <option value="other">Sonstiges</option>
         </select>
       </div>
 
@@ -239,8 +236,14 @@
 
       <!-- Submit Button -->
       <div class="form-group">
-        <button type="submit" class="submit-btn">Nachricht senden</button>
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <span class="btn-text">Nachricht senden</span>
+          <span class="btn-loader" style="display:none;">Wird gesendet...</span>
+        </button>
       </div>
+      
+      <!-- Status Messages -->
+      <div id="formStatus" class="form-status" style="display:none;"></div>
     </form>
   </section>
 
@@ -249,6 +252,9 @@
 
   <script src="js/main.js"></script>
   <script>
+    // WICHTIG: Ersetze 'YOUR_RECAPTCHA_SITE_KEY' im <head> mit deinem echten reCAPTCHA Site Key!
+    const RECAPTCHA_SITE_KEY = '6LfuXHAsAAAAAN1GemDix07OUFs4NwAQBi4G03BD'; // Hier den echten Key eintragen
+    
     // Dynamisches Formular für Bewerbungen
     document.addEventListener('DOMContentLoaded', function() {
       const contactTypeSelect = document.getElementById('contactType');
@@ -256,9 +262,15 @@
       const addressField = document.getElementById('address');
       const startDateField = document.getElementById('startDate');
       const hoursField = document.getElementById('hours');
+      const contactForm = document.getElementById('contactForm');
+      const submitBtn = document.getElementById('submitBtn');
+      const formStatus = document.getElementById('formStatus');
+
+      // CSRF Token laden
+      loadCSRFToken();
 
       contactTypeSelect.addEventListener('change', function() {
-        if (this.value === 'bewerbung') {
+        if (this.value === 'application') {
           applicationFields.style.display = 'block';
           addressField.setAttribute('required', 'required');
           startDateField.setAttribute('required', 'required');
@@ -271,45 +283,130 @@
         }
       });
 
+      // CSRF Token vom Backend laden
+      async function loadCSRFToken() {
+        try {
+          const response = await fetch('api/get-csrf-token.php');
+          const data = await response.json();
+          document.getElementById('csrfToken').value = data.csrf_token;
+        } catch (error) {
+          console.error('Fehler beim Laden des CSRF-Tokens:', error);
+        }
+      }
+
       // Form Submission Handler
-      document.getElementById('contactForm').addEventListener('submit', function(e) {
+      contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         // Validierung für Bewerbungen
-        if (contactTypeSelect.value === 'bewerbung') {
+        if (contactTypeSelect.value === 'application') {
           const positionChecked = document.querySelectorAll('input[name="position"]:checked').length > 0;
           const locationChecked = document.querySelectorAll('input[name="location"]:checked').length > 0;
           
           if (!positionChecked) {
-            alert('Bitte wähle mindestens eine Position aus.');
+            showStatus('Bitte wähle mindestens eine Position aus.', 'error');
             return;
           }
           
           if (!locationChecked) {
-            alert('Bitte wähle mindestens einen Standort aus.');
+            showStatus('Bitte wähle mindestens einen Standort aus.', 'error');
             return;
           }
         }
 
-        // Demo-Nachricht anzeigen
-        showDemoModal();
-        this.reset();
-        applicationFields.style.display = 'none';
+        // Loading-State aktivieren
+        setLoading(true);
+        
+        try {
+          // reCAPTCHA Token generieren
+          let recaptchaToken = '';
+          if (typeof grecaptcha !== 'undefined' && RECAPTCHA_SITE_KEY !== 'YOUR_RECAPTCHA_SITE_KEY') {
+            recaptchaToken = await grecaptcha.execute(RECAPTCHA_SITE_KEY, {action: 'submit'});
+          }
+          
+          // FormData sammeln
+          const formData = new FormData(contactForm);
+          const data = {
+            csrf_token: formData.get('csrf_token'),
+            recaptcha_token: recaptchaToken,
+            contactType: formData.get('contactType'),
+            name: formData.get('name'),
+            email: formData.get('email'),
+            phone: formData.get('phone') || '',
+            message: formData.get('message'),
+            website: formData.get('website') || '', // Honeypot
+            privacy: formData.get('privacy') === 'on'
+          };
+          
+          // Formular senden
+          const response = await fetch('api/contact-handler.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+          });
+          
+          const result = await response.json();
+          
+          if (result.success) {
+            showSuccessModal(result.message);
+            contactForm.reset();
+            applicationFields.style.display = 'none';
+            loadCSRFToken(); // Neuen CSRF Token laden
+          } else {
+            showStatus(result.error || 'Ein Fehler ist aufgetreten.', 'error');
+          }
+          
+        } catch (error) {
+          console.error('Fehler beim Absenden:', error);
+          showStatus('Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns telefonisch unter +49 6221 67 91 450.', 'error');
+        } finally {
+          setLoading(false);
+        }
       });
 
-      // Demo Modal Funktion
-      function showDemoModal() {
-        // Modal erstellen
+      // Loading-State umschalten
+      function setLoading(isLoading) {
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnLoader = submitBtn.querySelector('.btn-loader');
+        
+        if (isLoading) {
+          submitBtn.disabled = true;
+          submitBtn.classList.add('loading');
+          btnText.style.display = 'none';
+          btnLoader.style.display = 'inline';
+        } else {
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('loading');
+          btnText.style.display = 'inline';
+          btnLoader.style.display = 'none';
+        }
+      }
+
+      // Status-Nachricht anzeigen
+      function showStatus(message, type) {
+        formStatus.textContent = message;
+        formStatus.className = 'form-status ' + type;
+        formStatus.style.display = 'block';
+        
+        // Nach 8 Sekunden ausblenden
+        setTimeout(() => {
+          formStatus.style.display = 'none';
+        }, 8000);
+      }
+
+      // Erfolgs-Modal anzeigen
+      function showSuccessModal(message) {
         const modalOverlay = document.createElement('div');
         modalOverlay.className = 'modal-overlay';
         
         modalOverlay.innerHTML = `
-          <div class="modal-content">
-            <div class="modal-icon">
-              <!-- <i class="oma oma-construction-worker"></i> -->
-            </div>
-            <h3>Noch in Entwicklung</h3>
-            <p>Das Kontaktformular befindet sich noch in der Entwicklung. Die Versand-Funktion wird in Kürze verfügbar sein.</p>
+          <div class="modal-content success">
+            <div class="modal-icon success-icon">✓</div>
+            <h3>Nachricht gesendet!</h3>
+            <p>${message}</p>
+            <p class="modal-subtext">Wir melden uns so schnell wie möglich bei Ihnen.</p>
             <button class="modal-btn" onclick="this.closest('.modal-overlay').remove()">Verstanden</button>
           </div>
         `;

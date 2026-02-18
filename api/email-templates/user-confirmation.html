@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f5f7fa;
+        }
+        
+        .email-wrapper {
+            padding: 30px 20px;
+            background: #f5f7fa;
+        }
+        
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .email-header {
+            background: linear-gradient(135deg, #f0832a 0%, #e2be2b 100%);
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .success-badge {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        .email-header h1 {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+        }
+        
+        .email-header p {
+            color: rgba(255,255,255,0.9);
+            font-size: 16px;
+            font-weight: 500;
+            margin: 0;
+        }
+        
+        .email-body {
+            padding: 40px 30px;
+            color: #2d3748;
+        }
+        
+        .email-body h2 {
+            color: #2b549e;
+            font-size: 22px;
+            font-weight: 600;
+            margin: 0 0 20px 0;
+        }
+        
+        .email-body p {
+            color: #4a5568;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.6;
+            margin: 0 0 15px 0;
+        }
+        
+        .confirmation-box {
+            background: #ecfdf5;
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .confirmation-box .checkmark {
+            font-size: 48px;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+        
+        .confirmation-box h3 {
+            color: #065f46;
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+        }
+        
+        .confirmation-box p {
+            color: #047857;
+            font-size: 16px;
+            margin: 0;
+            font-weight: 500;
+        }
+        
+        .summary-box {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 25px 0;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .summary-row {
+            margin-bottom: 12px;
+        }
+        
+        .summary-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .summary-label {
+            color: #64748b;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+        
+        .summary-value {
+            color: #2d3748;
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        
+        .cta-box {
+            background: #fff7ed;
+            border: 2px solid #f0832a;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .cta-box h3 {
+            color: #2b549e;
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+        }
+        
+        .cta-box p {
+            margin-bottom: 18px;
+            color: #4a5568;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #f0832a 0%, #e2be2b 100%);
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .contact-info {
+            background: #fff7ed;
+            border-left: 4px solid #f0832a;
+            border-radius: 12px;
+            padding: 22px;
+            margin: 25px 0;
+        }
+        
+        .contact-info h3 {
+            color: #2b549e;
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0 0 15px 0;
+        }
+        
+        .contact-info p {
+            margin: 8px 0;
+        }
+        
+        .contact-info a {
+            color: #f0832a;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .email-footer {
+            background: #2b549e;
+            padding: 30px;
+            text-align: center;
+            border-top: 3px solid #f0832a;
+        }
+        
+        .email-footer p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 14px;
+            font-weight: 500;
+            margin: 6px 0;
+        }
+        
+        .email-footer .brand-name {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        
+        .email-footer .tagline {
+            color: #e2be2b;
+            font-weight: 600;
+        }
+        
+        .email-footer a {
+            color: #e2be2b;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .email-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media only screen and (max-width: 600px) {
+            .email-header, .email-body, .email-footer {
+                padding: 25px 20px;
+            }
+            
+            .email-header h1 {
+                font-size: 24px;
+            }
+            
+            .confirmation-box, .summary-box, .cta-box, .contact-info {
+                padding: 18px;
+            }
+            
+            .cta-button {
+                padding: 12px 24px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-wrapper">
+        <div class="email-container">
+            <div class="email-header">
+                <h1>Anfrage erhalten</h1>
+                <p>Vielen Dank für Ihre Kontaktaufnahme</p>
+            </div>
+        
+            <div class="email-body">
+                <p>Liebe/r {{name}},</p>
+                
+                <div class="confirmation-box">
+                    <div class="checkmark">🎉</div>
+                    <h3>Ihre Nachricht ist bei uns angekommen!</h3>
+                    <p>Wir werden uns schnellstmöglich bei Ihnen melden.</p>
+                </div>
+            
+            <p>
+                Wir haben Ihre Anfrage erhalten und unser Team wird sich so bald wie möglich mit Ihnen in Verbindung setzen. 
+                In der Regel antworten wir innerhalb von 24 Stunden (an Werktagen).
+            </p>
+            
+            <h2>Zusammenfassung Ihrer Anfrage</h2>
+            
+            <div class="summary-box">
+                <div class="summary-row">
+                    <div class="summary-label">Kontaktart</div>
+                    <div class="summary-value">{{contactTypeLabel}}</div>
+                </div>
+                
+                <div class="summary-row">
+                    <div class="summary-label">Ihre Nachricht</div>
+                    <div class="summary-value">{{message}}</div>
+                </div>
+                
+                <div class="summary-row">
+                    <div class="summary-label">Eingegangen am</div>
+                    <div class="summary-value">{{timestamp}}</div>
+                </div>
+            </div>
+            
+            <div class="cta-box">
+                <h3>Mehr über Assistara erfahren?</h3>
+                <p>Besuchen Sie unsere Website und informieren Sie sich über unsere Leistungen.</p>
+                <a href="https://assistara.de" class="cta-button">Zur Website</a>
+            </div>
+            
+            <div class="contact-info">
+                <h3>Haben Sie weitere Fragen?</h3>
+                <p>Sie können uns jederzeit kontaktieren:</p>
+                <p><strong>Telefon:</strong> <a href="tel:+4962216791450">+49 6221 67 91 450</a></p>
+                <p><strong>E-Mail:</strong> <a href="mailto:info@assistara.de">info@assistara.de</a></p>
+                <p style="margin-top: 12px; font-size: 14px; color: #718096;">
+                    <strong>Standorte:</strong> Heidelberg | Groß-Gerau | Rhein-Neckar-Region
+                </p>
+            </div>
+            
+            <p style="margin-top: 30px; font-size: 14px; color: #718096; border-top: 2px solid #e2e8f0; padding-top: 20px;">
+                <em>Weil Teilhabe ein Recht ist und kein Versprechen.</em>
+            </p>
+        </div>
+        
+            <div class="email-footer">
+                <p class="brand-name">Assistara</p>
+                <p class="tagline">Dein Plus an Unterstützung</p>
+                <p style="margin-top: 15px;">
+                    <a href="mailto:info@assistara.de">info@assistara.de</a> • 
+                    <a href="tel:+4962216791450">+49 6221 67 91 450</a>
+                </p>
+                <p style="margin-top: 10px;">
+                    <a href="https://assistara.de">www.assistara.de</a>
+                </p>
+                <p style="margin-top: 15px; font-size: 12px;">
+                    Diese E-Mail wurde automatisch generiert. Bitte antworten Sie nicht direkt auf diese E-Mail.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

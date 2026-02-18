@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f5f7fa;
+        }
+        
+        .email-wrapper {
+            padding: 30px 20px;
+            background: #f5f7fa;
+        }
+        
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .email-header {
+            background: #2b549e;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .email-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        .email-header h1 {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+        }
+        
+        .email-header p {
+            color: rgba(255,255,255,0.85);
+            font-size: 16px;
+            font-weight: 500;
+            margin: 0;
+        }
+        
+        .email-body {
+            padding: 40px 30px;
+            color: #2d3748;
+        }
+        
+        .email-body h2 {
+            color: #2b549e;
+            font-size: 22px;
+            font-weight: 600;
+            margin: 0 0 20px 0;
+        }
+        
+        .email-body p {
+            color: #4a5568;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.6;
+            margin: 0 0 15px 0;
+        }
+        
+        .info-box {
+            background: #f8fafc;
+            border-left: 4px solid #2b549e;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 25px 0;
+        }
+        
+        .info-row {
+            margin-bottom: 15px;
+        }
+        
+        .info-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .info-label {
+            color: #2b549e;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            display: inline-block;
+        }
+        
+        .info-value {
+            color: #2d3748;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+        
+        .message-box {
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 22px;
+            margin: 25px 0;
+        }
+        
+        .message-box p {
+            margin: 0;
+            white-space: pre-wrap;
+        }
+        
+        .email-footer {
+            background: #2b549e;
+            padding: 30px;
+            text-align: center;
+            border-top: 3px solid #f0832a;
+        }
+        
+        .email-footer p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 14px;
+            font-weight: 500;
+            margin: 6px 0;
+        }
+        
+        .email-footer .brand-name {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        
+        .email-footer .tagline {
+            color: #e2be2b;
+            font-weight: 600;
+        }
+        
+        .email-footer a {
+            color: #e2be2b;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .email-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media only screen and (max-width: 600px) {
+            .email-header, .email-body, .email-footer {
+                padding: 25px 20px;
+            }
+            
+            .email-header h1 {
+                font-size: 24px;
+            }
+            
+            .info-box, .message-box {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-wrapper">
+        <div class="email-container">
+            <div class="email-header">
+                <h1>Neue Kontaktanfrage</h1>
+                <p>Eine neue Nachricht über das Kontaktformular</p>
+            </div>
+        
+        <div class="email-body">
+            <h2>Kontaktdetails</h2>
+            
+            <div class="info-box">
+                <div class="info-row">
+                    <div class="info-label">Kontaktart</div>
+                    <div class="info-value">{{contactTypeLabel}}</div>
+                </div>
+                
+                <div class="info-row">
+                    <div class="info-label">Name</div>
+                    <div class="info-value">{{name}}</div>
+                </div>
+                
+                <div class="info-row">
+                    <div class="info-label">E-Mail-Adresse</div>
+                    <div class="info-value"><a href="mailto:{{email}}" style="color: #2b549e;">{{email}}</a></div>
+                </div>
+                
+                <div class="info-row">
+                    <div class="info-label">Telefon</div>
+                    <div class="info-value">{{phone}}</div>
+                </div>
+                
+                <div class="info-row">
+                    <div class="info-label">Eingegangen am</div>
+                    <div class="info-value">{{timestamp}}</div>
+                </div>
+            </div>
+            
+            <h2>Nachricht</h2>
+            
+            <div class="message-box">
+                <p class="info-value">{{message}}</p>
+            </div>
+            
+            <p style="margin-top: 30px; font-size: 14px; color: #718096;">
+                <strong>Hinweis:</strong> Bitte antworten Sie direkt an die E-Mail-Adresse des Absenders.
+            </p>
+        </div>
+        
+            <div class="email-footer">
+                <p class="brand-name">Assistara</p>
+                <p class="tagline">Dein Plus an Unterstützung</p>
+                <p style="margin-top: 15px;">
+                    <a href="mailto:info@assistara.de">info@assistara.de</a> • 
+                    <a href="tel:+4962216791450">+49 6221 67 91 450</a>
+                </p>
+                <p style="margin-top: 10px;">
+                    <a href="https://assistara.de">www.assistara.de</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
