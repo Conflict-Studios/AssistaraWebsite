@@ -2173,6 +2173,9 @@ footer {
     .hero-content {
         max-width: 450px;
     }
+    .hero-content p {
+        text-align: left;
+    }
     
     .hero-image-container {
         width: 42vw;
@@ -2181,6 +2184,9 @@ footer {
         max-height: 500px;
         margin-left: 10px;
     }
+
+
+
 }
 
 @media (max-width: 1000px) {

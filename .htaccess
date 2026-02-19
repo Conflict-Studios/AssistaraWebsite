@@ -33,6 +33,33 @@ AddDefaultCharset UTF-8
     RewriteEngine On
     RewriteCond %{HTTPS} off
     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    
+    # Redirect .html URLs to clean URLs
+    RewriteCond %{THE_REQUEST} ^GET\ /[^?\s]+\.html
+    RewriteRule ^(.*)\.html$ /$1 [R=301,L,NE]
+    
+    # Clean URLs - Case Insensitive Mapping zu tatsächlichen Dateien
+    # Hauptseiten
+    RewriteRule ^kontakt$ kontakt.html [NC,L]
+    RewriteRule ^leistungen$ leistungen.html [NC,L]
+    RewriteRule ^ueber-uns$ ueber-uns.html [NC,L]
+    RewriteRule ^impressum$ impressum.html [NC,L]
+    RewriteRule ^datenschutz$ datenschutz.html [NC,L]
+    
+    # Verschachtelte Leistungen-URLs
+    RewriteRule ^leistungen/persoenliche$ persoenliche.html [NC,L]
+    RewriteRule ^leistungen/schul-individual-begleitung$ schul-individual-begleitung.html [NC,L]
+    RewriteRule ^leistungen/personliches-budget$ personliches-budget.html [NC,L]
+    
+    # Fallback: alte direkte URLs weiterhin unterstützen (redirect zu neuer Struktur)
+    RewriteRule ^persoenliche$ /Leistungen/Persoenliche [R=301,NC,L]
+    RewriteRule ^schul-individual-begleitung$ /Leistungen/Schul-Individual-Begleitung [R=301,NC,L]
+    RewriteRule ^personliches-budget$ /Leistungen/Personliches-Budget [R=301,NC,L]
+    
+    # Fallback: Wenn existierende Datei/Verzeichnis, dann direkt
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
 </IfModule>
 
 # API Directory Protection

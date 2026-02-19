@@ -7,20 +7,20 @@ async function loadNavbar() {
   if (!navbarContainer) return;
   
   try {
-    const response = await fetch('components/navbar.html');
+    const response = await fetch('/components/navbar.html');
     const html = await response.text();
     navbarContainer.innerHTML = html;
     
-    // Set active link based on current page
-    const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'index';
+    // Get current path (without trailing slash)
+    const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
     
     // Check if current page is a dropdown item
     const dropdownLinks = document.querySelectorAll('.dropdown-link');
     let isDropdownPage = false;
     
     dropdownLinks.forEach(link => {
-      const linkPage = link.getAttribute('href').replace('.html', '');
-      if (linkPage === currentPage) {
+      const linkPath = link.getAttribute('href').replace(/\/$/, '');
+      if (linkPath.toLowerCase() === currentPath.toLowerCase()) {
         link.classList.add('active');
         // Also mark the parent "Leistungen" link as active
         const parentNavLink = link.closest('.nav-dropdown').querySelector('.nav-link');
@@ -35,7 +35,8 @@ async function loadNavbar() {
     if (!isDropdownPage) {
       const navLinks = document.querySelectorAll('.nav-link');
       navLinks.forEach(link => {
-        if (link.dataset.page === currentPage) {
+        const linkPath = link.getAttribute('href').replace(/\/$/, '');
+        if (linkPath.toLowerCase() === currentPath.toLowerCase()) {
           link.classList.add('active');
         }
       });
@@ -166,7 +167,7 @@ async function loadFooter() {
   const footerContainer = document.getElementById('footer-container');
   if (!footerContainer) return;
   try {
-    const response = await fetch('components/footer.html');
+    const response = await fetch('/components/footer.html');
     const html = await response.text();
     footerContainer.innerHTML = html;
   } catch (error) {
@@ -230,28 +231,3 @@ document.addEventListener('DOMContentLoaded', function () {
     images[prev].style.zIndex = '1';
   }, 5000);
 });
-
-// Form validation
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-  contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Basic validation
-    const formData = new FormData(contactForm);
-    let isValid = true;
-    
-    formData.forEach((value, key) => {
-      if (!value.trim()) {
-        isValid = false;
-      }
-    });
-    
-    if (isValid) {
-      alert('Vielen Dank für Ihre Nachricht! Wir werden uns zeitnah bei Ihnen melden.');
-      contactForm.reset();
-    } else {
-      alert('Bitte füllen Sie alle Felder aus.');
-    }
-  });
-}
