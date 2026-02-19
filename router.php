@@ -92,6 +92,7 @@ if (file_exists($filePath) && !is_dir($filePath)) {
     return true;
 }
 
-// 404 - zur index.html
+// 404 - zeige 404.html
 header("HTTP/1.0 404 Not Found");
-include __DIR__ . '/index.html';
+header('Content-Type: text/html; charset=UTF-8');
+include __DIR__ . '/404.html';
