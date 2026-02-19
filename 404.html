@@ -10,7 +10,15 @@
   <script>
     // GitHub Pages Clean URL Router
     (function() {
-      const path = window.location.pathname.toLowerCase().replace(/\/$/, '');
+      const originalPath = window.location.pathname;
+      
+      // Entferne trailing slashes (außer root)
+      if (originalPath !== '/' && originalPath.endsWith('/')) {
+        window.location.replace(originalPath.slice(0, -1));
+        return;
+      }
+      
+      const path = originalPath.toLowerCase().replace(/\/$/, '');
       
       // Mapping für Clean URLs (case-insensitive)
       const routes = {
