@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>assistara</title>
+  <script>
+    // GitHub Pages Clean URL Router
+    // Lädt die entsprechende HTML-Datei ohne URL-Änderung
+    (function() {
+      const path = window.location.pathname.toLowerCase().replace(/\/$/, '');
+      
+      // Mapping für Clean URLs (case-insensitive)
+      const routes = {
+        '/kontakt': '/kontakt.html',
+        '/leistungen': '/leistungen.html',
+        '/ueber-uns': '/ueber-uns.html',
+        '/impressum': '/impressum.html',
+        '/datenschutz': '/datenschutz.html',
+        
+        // Verschachtelte Leistungen-URLs
+        '/leistungen/persoenliche': '/persoenliche.html',
+        '/leistungen/schul-individual-begleitung': '/schul-individual-begleitung.html',
+        '/leistungen/personliches-budget': '/personliches-budget.html',
+        
+        // Alte direkte URLs
+        '/persoenliche': '/persoenliche.html',
+        '/schul-individual-begleitung': '/schul-individual-begleitung.html',
+        '/personliches-budget': '/personliches-budget.html',
+      };
+      
+      // Prüfen ob eine Route existiert
+      if (routes[path]) {
+        // Lade den Inhalt per fetch und ersetze das Dokument
+        fetch(routes[path])
+          .then(response => response.text())
+          .then(html => {
+            // Ersetze das gesamte Dokument (behält die Clean URL)
+            document.open();
+            document.write(html);
+            document.close();
+            
+            // Update history state für korrekte Navigation
+            if (window.history && window.history.replaceState) {
+              window.history.replaceState(null, '', window.location.pathname);
+            }
+          })
+          .catch(() => {
+            // Bei Fehler zur Startseite
+            window.location.replace('/');
+          });
+      } else {
+        // Fallback zur Startseite
+        window.location.replace('/');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <div style="text-align: center; margin-top: 50px; font-family: 'Quicksand', sans-serif;">
+    <h2>Lädt...</h2>
+  </div>
+</body>
+</html>
